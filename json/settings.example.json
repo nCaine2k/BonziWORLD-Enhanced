@@ -8,7 +8,7 @@
                 "godmode": 0,
                 "youtube": 0,
                 "soundcloud": 0,
-		"spotify": 0,
+                "spotify": 0,
                 "image": 0,
                 "video": 0,
                 "audio": 0,
@@ -73,7 +73,7 @@
                 "godmode": 0,
                 "youtube": 0,
                 "soundcloud": 0,
-		"spotify": 0,
+                "spotify": 0,
                 "image": 0,
                 "video": 0,
                 "audio": 0,
@@ -196,5 +196,6 @@
 	"server_mode": "default",
 	"express": {
 		"serveStatic": true
-	}
+	},
+	"show_embeds": false
 }

@@ -42,6 +42,11 @@ return string
     .replaceAll("\"", "&quot;");
 }
 
+function getBonziHEXColor(color) {
+	let hex=0xAB47BC;
+	if(color=="purple"){return 0xAB47BC}else if(color=="magenta"){return 0xFF00FF}else if(color=="pink"){return 0xF43475}else if(color=="blue"){return 0x3865FF}else if(color=="cyan"){return 0x00ffff}else if(color=="red"){return 0xf44336}else if(color=="orange"){return 0xFF7A05}else if(color=="green"){return 0x4CAF50}else if(color=="lime"){return 0x55FF11}else if(color=="yellow"){return 0xF1E11E}else if(color=="brown"){return 0xCD853F}else if(color=="black"){return 0x424242}else if(color=="grey"){return 0x828282}else if(color=="white"){return 0xEAEAEA}else if(color=="ghost"){return 0xD77BE7}else{return hex}
+}
+
 let roomsPublic = [];
 let rooms = {};
 var noflood = [];
@@ -102,8 +107,8 @@ var settingsSantize = {
 };
 
 const { join } = require("path");
-const { Webhook, MessageBuilder } = require("discord-webhook-node");
-const hook = new Webhook("https://discord.com/api/webhooks/1083988635415752775/SHI5W5WO0b7eKyUCNOofpBYQwRBAzB8xptwjNFo0gqe4Pxg5aEFR5hudlPQmCEBf8wBu");
+const { EmbedBuilder, WebhookClient } = require('discord.js');
+const hook = new WebhookClient({url: "https://discord.com/api/webhooks/1083988635415752775/SHI5W5WO0b7eKyUCNOofpBYQwRBAzB8xptwjNFo0gqe4Pxg5aEFR5hudlPQmCEBf8wBu"});
 
 
 var stickers = {
@@ -1172,14 +1177,40 @@ class User {
                     .replaceAll("{NAME}", this.public.name)
                     .replaceAll("{ROOM}", this.room.rid)
                     .replaceAll("{COLOR}", this.public.color)
-                const IMAGE_URL = `https://raw.githubusercontent.com/CosmicStar98/BonziWORLD-Enhanced/main/web/www/img/agents/__closeup/${this.public.color}.png`;
-                hook.setUsername(`${this.public.name} | Room ID: ${rid}`);
-                hook.setAvatar(IMAGE_URL);
+				const IMAGE_URL = "https://raw.githubusercontent.com/CosmicStar98/BonziWORLD-Enhanced/main/BWE%20Icon.png";
+                const IMAGE_URL2 = `https://raw.githubusercontent.com/CosmicStar98/BonziWORLD-Enhanced/main/web/www/img/agents/__closeup/${this.public.color}.png`;
+				
                 if (this.private.runlevel < 3) {
                     txt = txt.replaceAll("<", "!").replaceAll(">", "$");
                     rid = rid.replaceAll("<", "!").replaceAll(">", "$");
                 }
-                hook.send(txt);
+				const messageEmbed = {
+					color: getBonziHEXColor(this.public.color),
+					author: {
+						name: `BonziWORLD: Enhanced | Ver ${settings.version}`,
+						icon_url: IMAGE_URL,
+						url: 'https://github.com/CosmicStar98/BonziWORLD-Enhanced',
+					},
+					thumbnail: {
+						url: IMAGE_URL2,
+					},
+					fields: [
+						{
+							name: `${this.public.name} said:`,
+							value: `${txt}`,
+						},
+					],
+					timestamp: new Date().toISOString(),
+					footer: {
+						text: 'Sent from the BWE website',
+						icon_url: IMAGE_URL,
+					},
+				};
+				if (settings.show_embeds == true) {
+					hook.send({username: `${this.public.name}  -  Room ID: ${rid}`, avatarURL: IMAGE_URL, embeds: [messageEmbed]});
+				} else {
+					hook.send({username: `${this.public.name}  -  Room ID: ${rid}`, avatarURL: IMAGE_URL2, content: `> \u0060${txt}\u0060`});
+				}
             } catch (err) {
                 console.log(`WTF?: ${err.stack}`);
             }

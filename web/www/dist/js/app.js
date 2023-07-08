@@ -1430,7 +1430,7 @@ function bonziBroadcast(obj){
 var server_io = `${window.location.protocol}//${window.location.hostname}:${window.location.port}`;
 var socket = io(server_io, {
     query: {
-		version: "1.00",
+		version: "1.01",
         channel: "bonziuniverse-enhanced",
 		release: "production-web",
         lang: (window.navigator && window.navigator.language && window.navigator.language.slice(0, 2)) || "en",

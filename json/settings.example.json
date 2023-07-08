@@ -190,7 +190,7 @@
 	"banLength": 1440,
 	"port": 3000,
 	"isReplit": false,
-	"version": "1.00",
+	"version": "1.01",
 	"release": "development",
 	"channel": "bonziuniverse-enhanced",
 	"server_mode": "default",

@@ -1,6 +1,6 @@
 {
   "name": "bonziworld_e_server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Server for the BonziWORLD Enhanced chat client.",
   "author": "Cosmic",
   "private": true,

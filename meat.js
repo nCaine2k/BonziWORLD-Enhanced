@@ -754,8 +754,8 @@ let userCommands = {
         if (argsString.trim().match(/f\s+u\s+n\s+e/gi)) {return}
         if (argsString.trim().match(/fune/gi)) {return}
         if (argsString.trim().match(/(\S*)(bonzi|bonziworld).(lol|ga|tk|cf|com|net)/gi)) {return}
-        if (argsString.trim().match(/http:\/\//gi) && !argsString.trim().match(/http:\/\/(youtube|github|reddit|twitter).com/gi)) {return}
-        if (argsString.trim().match(/https:\/\//gi) && !argsString.trim().match(/https:\/\/(youtube|github|reddit|twitter).com/gi)) {return}
+        if (argsString.trim().match(/http:\/\//gi)) {return}
+        if (argsString.trim().match(/https:\/\//gi)) {return}
         if (argsString.trim().match(/(discord.gg\/|discord.gg)/gi)) {return}
         if (argsString.trim().match(/(discord.com\/|discord.com)/gi)) {return}
         if (argsString.includes("@")) {return}

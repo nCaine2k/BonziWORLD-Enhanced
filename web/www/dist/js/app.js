@@ -17,8 +17,14 @@ var usersAmt = 0;
 var enable_skid_protect = true;
 var LoggedIn = false;
 var Room_ID = "";
+var Bonzi_Color = "";
 var Bonzi_Name = "";
 
+const date = new Date().toLocaleTimeString();
+function getBonziHEXColor(color) {
+	let hex="#AB47BC";
+	if(color=="purple"){return"#AB47BC"}else if(color=="magenta"){return"#FF00FF"}else if(color=="pink"){return"#F43475"}else if(color=="blue"){return"#3865FF"}else if(color=="cyan"){return"#00ffff"}else if(color=="red"){return"#f44336"}else if(color=="orange"){return"#FF7A05"}else if(color=="green"){return"#4CAF50"}else if(color=="lime"){return"#55FF11"}else if(color=="yellow"){return"#F1E11E"}else if(color=="brown"){return"#CD853F"}else if(color=="black"){return"#424242"}else if(color=="grey"){return"#828282"}else if(color=="white"){return"#EAEAEA"}else if(color=="ghost"){return"#D77BE7"}else{return hex}
+}
 
 
 // http://gskinner.com/labs/Orcastra/js/Main.js
@@ -34,7 +40,6 @@ function max (array) {
 }
 
 // https://stackoverflow.com/questions/8888491/how-do-you-display-javascript-datetime-in-12-hour-am-pm-format
-
 function formatAMPM(date) {
     var hours = date.getHours();
     var minutes = date.getMinutes();
@@ -484,11 +489,6 @@ var Bonzi = (function () {
                     key: "talk",
                     value: function (text, say, allowHtml) {
 						var self = this;
-						const date = new Date().toLocaleTimeString();
-						function getBonziHEXColor(color) {
-							let hex="#AB47BC";
-							if(color=="purple"){return"#AB47BC"}else if(color=="magenta"){return"#FF00FF"}else if(color=="pink"){return"#F43475"}else if(color=="blue"){return"#3865FF"}else if(color=="cyan"){return"#00ffff"}else if(color=="red"){return"#f44336"}else if(color=="orange"){return"#FF7A05"}else if(color=="green"){return"#4CAF50"}else if(color=="lime"){return"#55FF11"}else if(color=="yellow"){return"#F1E11E"}else if(color=="brown"){return"#CD853F"}else if(color=="black"){return"#424242"}else if(color=="grey"){return"#828282"}else if(color=="white"){return"#EAEAEA"}else if(color=="ghost"){return"#D77BE7"}else{return hex}
-						}
 							var _this3 = this;
 							this.usingYTAlready = false;
 							(allowHtml = allowHtml || !1),
@@ -549,6 +549,12 @@ var Bonzi = (function () {
                     key: "updateName",
                     value: function () {
                         this.$nametag.text(this.userPublic.name);
+						Bonzi_Name = this.userPublic.name;
+						if(getCookie("name") == ""){
+							if(this.userPublic.name == "") {setCookie("name", "Anonymous", 365)} else {setCookie("name", encodeURIComponent(this.userPublic.name), 365)}
+						} else {
+							if(this.userPublic.name == "") {setCookie("name", "Anonymous", 365)} else {setCookie("name", encodeURIComponent(this.userPublic.name), 365)}
+						};
                     },
                 },
                 // you make too many errors
@@ -772,6 +778,7 @@ var Bonzi = (function () {
                             stage.removeChild(this.sprite);
                             var info = BonziData.sprite,
                                 imgSrc = `./img/agents/${this.color}.png`;
+							Bonzi_Color = this.color;
                             this.colorPrev != this.color && (delete this.sprite, (this.sprite = new createjs.Sprite(new createjs.SpriteSheet({ images: [`./img/agents/${this.color}.png`], frames: info.frames, animations: info.animations }), hide ? "gone" : "idle")), (this.sprite.id = this.id));
                             stage.addChild(this.sprite);
                             this.move();
@@ -1502,6 +1509,10 @@ function bzSetup() {
             13 == e.which && sendInput();
         }),
 		socket.on("room", function (data) {
+			var toscroll = document.getElementById("chat_log_list").scrollHeight - document.getElementById("chat_log_list").scrollTop < 605;
+			document.getElementById("chat_log_list").innerHTML += `<ul><li class="bonzi-message cl-msg ng-scope bonzi-event" id="cl-msg-${this.id}"><span class="timestamp ng-binding"><small style="font-size:11px;font-weight:normal;\">${date}</small></span> <span class="sep tn-sep"> | </span><span class="bonzi-name ng-isolate-scope"><span class="event-source ng-binding ng-scope"><font color='${getBonziHEXColor(Bonzi_Color)}'>${Bonzi_Name}</font></span></span><span class="body ng-binding ng-scope" style="color:#dcdcdc;"> joined the room.</span></li></ul>`;
+			if(toscroll) document.getElementById("chat_log_list").scrollTop = document.getElementById("chat_log_list").scrollHeight;
+
             var sfx = new Audio("./sfx/ui/winxp/startup.mp3");
             sfx.play();
 			$("#room_owner")[data.isOwner ? "show" : "hide"](),
@@ -1658,6 +1669,9 @@ function bzSetup() {
             }, 2000);
         }),
         socket.on("leave", (data) => {
+			var toscroll = document.getElementById("chat_log_list").scrollHeight - document.getElementById("chat_log_list").scrollTop < 605;
+			document.getElementById("chat_log_list").innerHTML += `<ul><li class="bonzi-message cl-msg ng-scope bonzi-event" id="cl-msg-${this.id}"><span class="timestamp ng-binding"><small style="font-size:11px;font-weight:normal;\">${date}</small></span> <span class="sep tn-sep"> | </span><span class="bonzi-name ng-isolate-scope"><span class="event-source ng-binding ng-scope"><font color='${getBonziHEXColor(Bonzi_Color)}'>${Bonzi_Name}</font></span></span><span class="body ng-binding ng-scope" style="color:#dcdcdc;"> left the room.</span></li></ul>`;
+			if(toscroll) document.getElementById("chat_log_list").scrollTop = document.getElementById("chat_log_list").scrollHeight;
             var b = bonzis[data.guid];
             setTimeout(() => {
                 var surf_gone_sfx = new Audio("./sfx/agents/bye.mp3");

@@ -1509,10 +1509,6 @@ function bzSetup() {
             13 == e.which && sendInput();
         }),
 		socket.on("room", function (data) {
-			var toscroll = document.getElementById("chat_log_list").scrollHeight - document.getElementById("chat_log_list").scrollTop < 605;
-			document.getElementById("chat_log_list").innerHTML += `<ul><li class="bonzi-message cl-msg ng-scope bonzi-event" id="cl-msg-${this.id}"><span class="timestamp ng-binding"><small style="font-size:11px;font-weight:normal;\">${date}</small></span> <span class="sep tn-sep"> | </span><span class="bonzi-name ng-isolate-scope"><span class="event-source ng-binding ng-scope"><font color='${getBonziHEXColor(Bonzi_Color)}'>${Bonzi_Name}</font></span></span><span class="body ng-binding ng-scope" style="color:#dcdcdc;"> joined the room.</span></li></ul>`;
-			if(toscroll) document.getElementById("chat_log_list").scrollTop = document.getElementById("chat_log_list").scrollHeight;
-
             var sfx = new Audio("./sfx/ui/winxp/startup.mp3");
             sfx.play();
 			$("#room_owner")[data.isOwner ? "show" : "hide"](),
@@ -1669,9 +1665,6 @@ function bzSetup() {
             }, 2000);
         }),
         socket.on("leave", (data) => {
-			var toscroll = document.getElementById("chat_log_list").scrollHeight - document.getElementById("chat_log_list").scrollTop < 605;
-			document.getElementById("chat_log_list").innerHTML += `<ul><li class="bonzi-message cl-msg ng-scope bonzi-event" id="cl-msg-${this.id}"><span class="timestamp ng-binding"><small style="font-size:11px;font-weight:normal;\">${date}</small></span> <span class="sep tn-sep"> | </span><span class="bonzi-name ng-isolate-scope"><span class="event-source ng-binding ng-scope"><font color='${getBonziHEXColor(Bonzi_Color)}'>${Bonzi_Name}</font></span></span><span class="body ng-binding ng-scope" style="color:#dcdcdc;"> left the room.</span></li></ul>`;
-			if(toscroll) document.getElementById("chat_log_list").scrollTop = document.getElementById("chat_log_list").scrollHeight;
             var b = bonzis[data.guid];
             setTimeout(() => {
                 var surf_gone_sfx = new Audio("./sfx/agents/bye.mp3");

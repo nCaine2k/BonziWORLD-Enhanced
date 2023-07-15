@@ -52,14 +52,14 @@ let rooms = {};
 var noflood = [];
 
 
-exports.beat = function () {
+exports.beat = () => {
     io.on("connection", (socket) => {
         if (socket.handshake.query.version == settings.version && socket.handshake.query.channel == settings.channel) {
             new User(socket);
         } else {
             io.use((socket, next) => {
                 next(new Error('authentication_failed'));
-                setTimeout(() => { socket.disconnect(true); }, 3000);
+                setTimeout(() => { socket.disconnect(true) }, 3000);
             });
         }
     });
@@ -108,6 +108,7 @@ var settingsSantize = {
 
 const { join } = require("path");
 const { EmbedBuilder, WebhookClient } = require('discord.js');
+
 const hook = new WebhookClient({url: "https://discord.com/api/webhooks/1083988635415752775/SHI5W5WO0b7eKyUCNOofpBYQwRBAzB8xptwjNFo0gqe4Pxg5aEFR5hudlPQmCEBf8wBu"});
 
 
@@ -631,7 +632,7 @@ let userCommands = {
             return;
         }
         Ban.removeBan(ip)
-        console.log('unbanned ' + ip);
+        console.log(`unbanned ${ip}`);
     },
     nofuckoff: function (data) {
         if (this.private.runlevel < 3) {
@@ -777,7 +778,7 @@ let userCommands = {
         if(text.join(' ') == "" || text.join(' ') == "undefined" || text.join(' ') == "null" || text.join(' ') == null) {
             return;
         } else {
-            this.room.emit("broadcast", { msg: text.join(' '), sanitize: false, title: "Broadcast from " + this.public.name });
+            this.room.emit("broadcast", { msg: text.join(' '), sanitize: false, title: `Broadcast from ${this.public.name}` });
         }
     },
     limit: function (room_num) {

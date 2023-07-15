@@ -18,12 +18,12 @@ const path = require('path');
 
 // Load settings
 try {
-  stats = fs.lstatSync(__dirname + "/json/settings.json");
+  stats = fs.lstatSync(`${__dirname}/json/settings.json`);
 } catch (err) {
   // If settings do not yet exist
   if (err.code == "ENOENT") {
     try {
-      fs.copySync(__dirname + "/json/settings.example.json", __dirname + "/json/settings.json");
+      fs.copySync(`${__dirname}/json/settings.example.json`, `${__dirname}/json/settings.json`);
       console.log("Created new settings file.");
     } catch (err) {
       console.log(err);
@@ -37,26 +37,26 @@ try {
 }
 
 // Load settings into memory
-const settings = require(__dirname + "/json/settings.json");
+const settings = require(`${__dirname}/json/settings.json`);
 
 // Setup basic express server
 var express = require("express");
 var app = express();
-if (settings.express.serveStatic) app.use(express.static(__dirname + "/web/www"));
+if (settings.express.serveStatic) app.use(express.static(`${__dirname}/web/www`));
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 app.use(cookieParser());
-app.get('/readme.html', function(req, res) {
-  res.sendFile(__dirname + '/web/www/readme/index.html');
+app.get('/readme.html', (req, res) => {
+  res.sendFile(`${__dirname}/web/www/readme/index.html`);
 });
-app.get('/rules.html', function(req, res) {
-  res.sendFile(__dirname + '/web/www/rules/index.html');
+app.get('/rules.html', (req, res) => {
+  res.sendFile(`${__dirname}/web/www/rules/index.html`);
 });
-app.get('/discord.html', function(req, res) {
-  res.sendFile(__dirname + '/web/www/discord/index.html');
+app.get('/discord.html', (req, res) => {
+  res.sendFile(`${__dirname}/web/www/discord/index.html`);
 });
-app.get('/arcade.html', function(req, res) {
-  res.sendFile(__dirname + '/web/www/arcade/index.html');
+app.get('/arcade.html', (req, res) => {
+  res.sendFile(`${__dirname}/web/www/arcade/index.html`);
 });
 var server = require("http").createServer(app);
 
@@ -90,9 +90,9 @@ Ban.init();
 
 // Start actually listening
 server.listen(port, function() {
-  console.log(" Welcome to BonziWORLD Enhanced!!\n", "HTTP Express Server listening on port " + port + "\n", "=+.----------------*-<|{ Logs }|>-*----------------.+=\n");
+  console.log(" Welcome to BonziWORLD Enhanced!!\n", `HTTP Express Server listening on port ${port}\n`, "=+.----------------*-<|{ Logs }|>-*----------------.+=\n");
 });
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(`${__dirname}/public`));
 
 // ========================================================================
 // Helper functions

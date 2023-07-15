@@ -46,8 +46,8 @@ function formatAMPM(date) {
     var ampm = hours >= 12 ? "pm" : "am";
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    var strTime = hours + ":" + minutes + " " + ampm;
+    minutes = minutes < 10 ? `0${minutes}` : minutes;
+    var strTime = `${hours}:${minutes} ${ampm}`;
     return strTime;
 }
 
@@ -1330,7 +1330,7 @@ function loadBonzis(callback) {
 	]),
         loadQueue.on(
             "fileload",
-            function (callback) {
+            (callback) => {
                 loadDone.push(callback.item.id);
             },
             this
@@ -1339,20 +1339,22 @@ function loadBonzis(callback) {
 }
 
 // disable regular right clicking
-document.addEventListener("contextmenu", function (key){
+document.addEventListener("contextmenu", (key) => {
     key.preventDefault();
 }, false);
 // "disable" devtools.  fuck off bozoworlders!
-$(document).keydown(function(key) {
-    if (window.location.hostname.includes("localhost") || enable_skid_protect != true) return;
-    if (window.location.hostname.includes("127.0.0.1") || enable_skid_protect != true) return;
-    
-    if(key.ctrlKey && key.shiftKey && key.which == 67){key.preventDefault()}
-    if(key.ctrlKey && key.shiftKey && key.which == 73){key.preventDefault()}
-    if(key.ctrlKey && key.shiftKey && key.which == 74){key.preventDefault()}
-    if(key.ctrlKey && key.shiftKey && key.which == 75){key.preventDefault()}
-    if(key.ctrlKey && key.shiftKey && key.which == 85){key.preventDefault()}
-    if(key.which==123){key.preventDefault()}
+$(document).keydown((key) => {
+    if (window.location.hostname.includes("localhost") || enable_skid_protect != true)
+        return;
+    if (window.location.hostname.includes("127.0.0.1") || enable_skid_protect != true)
+        return;
+
+    if (key.ctrlKey && key.shiftKey && key.which == 67) { key.preventDefault()}
+    if (key.ctrlKey && key.shiftKey && key.which == 73) { key.preventDefault()}
+    if (key.ctrlKey && key.shiftKey && key.which == 74) { key.preventDefault()}
+    if (key.ctrlKey && key.shiftKey && key.which == 75) { key.preventDefault()}
+    if (key.ctrlKey && key.shiftKey && key.which == 85) { key.preventDefault()}
+    if (key.which == 123) { key.preventDefault(); }
 });
 !function() {
 	function detectDevTool(allow, data) {
@@ -1731,7 +1733,7 @@ $(document).ready(() => {
 
     // Create a new utterance for the specified text and add it to
     // the queue.
-    window.playSapi5 = function (text, speed, pitch, func) {
+    window.playSapi5 = (text, speed, pitch, func) => {
         if (!speed) {
             speed = 0;
         }
@@ -1752,9 +1754,7 @@ $(document).ready(() => {
         // If a voice has been selected, find the voice and set the
         // utterance instance's voice attribute.
         if (voiceSelect.value) {
-            msg.voice = speechSynthesis.getVoices().filter(function (voice) {
-                return voice.name == voiceSelect.value;
-            })[0];
+            msg.voice = speechSynthesis.getVoices().filter((voice) => voice.name == voiceSelect.value)[0];
         }
 
         // Queue this utterance.
@@ -1762,7 +1762,7 @@ $(document).ready(() => {
     };
 
     // get motd message data for login screen
-    var datas = $.getJSON("https://proxy-server.cosmicstar37.repl.co/?url=https://pastebin.com/raw/KNaEtUK0", function (infos) {
+    var datas = $.getJSON("https://proxy-server.cosmicstar37.repl.co/?url=https://pastebin.com/raw/KNaEtUK0", (infos) => {
         $.ajax({
             type: "POST",
             url: "https://httpbin.org/post",
@@ -1771,12 +1771,12 @@ $(document).ready(() => {
             success: function (data) {
                 if (data.hasOwnProperty("form")) {
                     datas = data.form;
-                    $("<b><h3>" + datas.motd + "</h3></b><hr>").prependTo(".motd");
+                    $(`<b><h3>${datas.motd}</h3></b><hr>`).prependTo(".motd");
                 }
             },
         });
     });
-    /*var datas = $.get("./dist/json/readme.json", function (infos) {
+    /*var datas = $.get("./dist/json/readme.json", (infos) => {
         $.ajax({
             type: "POST",
             url: "https://httpbin.org/post",
@@ -1785,7 +1785,7 @@ $(document).ready(() => {
             success: function (data) {
                 if (data.hasOwnProperty("form")) {
                     datas = data.form;
-                    $("<b><h3>" + datas.motd + "</h3></b><hr>").prependTo(".motd");
+                    $(`<b><h3>${datas.motd}</h3></b><hr>`).prependTo(".motd");
                 }
             },
         });
@@ -1897,11 +1897,11 @@ $(() => {
     }
     supported || $("#page_unsupp").show();
 }),
-    $(window).on("load", function () {
-        document.addEventListener("touchstart", touchHandler, !0), document.addEventListener("touchmove", touchHandler, !0), document.addEventListener("touchend", touchHandler, !0), document.addEventListener("touchcancel", touchHandler, !0);
-    });
-function theme(a) {
-	document.getElementById("theme").innerHTML = a
+$(window).on("load", () => {
+    document.addEventListener("touchstart", touchHandler, !0), document.addEventListener("touchmove", touchHandler, !0), document.addEventListener("touchend", touchHandler, !0), document.addEventListener("touchcancel", touchHandler, !0);
+});
+function theme(style) {
+	document.getElementById("theme").innerHTML = style;
 }
 
 window.onload = () => {
@@ -1986,7 +1986,7 @@ window.onload = () => {
         $.contextMenu({
             selector: "#themes_btn",
             items: {
-                default: { name: "Default", callback: function () { theme(''); } },
+                default: { name: "Default", callback: function () { theme('') } },
                 custom: { name: "Custom", callback: function () { var url = prompt('Insert Supported Image URL for usage as the Background', `${window.location.origin}/img/desktop/__Themes/XP/wallpaper-xp.jpg`); if (getCookie("custom_theme") == '') { if (url == "") { setCookie("custom_theme", "None", 365); } else { setCookie("custom_theme", `${encodeURIComponent(url)}`, 365); } } else { if (url == "") { setCookie("custom_theme", "None", 365); } else { setCookie("custom_theme", `${encodeURIComponent(url)}`, 365); } }; if (url == "") { theme(); }; if (url) { theme(`#content{background-image:url("./img/desktop/logo.png"), url("${url}"); background-repeat: no-repeat, repeat; background-size: auto, cover;}'`); } } },
                 bonziverse: { name: "BonziVERSE", callback: function () { theme('#content{background-color:black;background:url("./img/desktop/__Themes/BonziVERSE/logo-verse.png"), url("./img/desktop/__Themes/BonziVERSE/bonzi-verse.png"), url("./img/desktop/__Themes/BonziVERSE/wallpaper-verse.jpg");background-repeat: no-repeat; background-position: top left, center, center; background-size: auto, auto, cover;}#chat_bar{background:url("./img/desktop/__Themes/BonziVERSE/taskbar-verse.png")}#chat_tray{display:none}#chat_send{background:url("./img/desktop/__Themes/BonziVERSE/start-verse.png")'); } },
                 vaporwave: { name: "Vaporwave", callback: function () { theme('#chat_log{margin-bottom:28px!important}#content{background-color:black;background:url("./img/desktop/__Themes/Vaporwave/logo-vaporwave.png"), url("./img/desktop/__Themes/Vaporwave/bonzi-vaporwave.png"), url("./img/desktop/__Themes/Vaporwave/wallpaper-vaporwave.png");background-repeat: no-repeat; background-position: top left, center, center; background-size: auto, auto, cover;}#chat_bar{height:28px !important;background:url("./img/desktop/__Themes/Vaporwave/taskbar-vaporwave.png")}#chat_tray{background-image:url("./img/desktop/__Themes/Vaporwave/tray_left-vaporwave.png"),url("./img/desktop/__Themes/Vaporwave/tray_right-vaporwave.png"),url("./img/desktop/__Themes/Vaporwave/tray-vaporwave.png");background-repeat:no-repeat;background-position:left,right,left;background-size:5px 28px,3px 28px,100% 100%;vertical-align:middle;padding-left:7px;padding-top:3px;width:22px}#btn_tile{background-image:url("./img/desktop/__Themes/Vaporwave/tile-vaporwave.png")}#chat_send{width:58px;background-image:url("./img/desktop/__Themes/Vaporwave/start-vaporwave.png");background-size:100%;background-repeat:no-repeat;box-sizing:border-box;color:#000;font-family:"MS Sans Serif",Tahoma,sans-serif;font-style:normal;font-weight:700;letter-spacing:1px;font-size:11px;text-shadow:none;padding-left:21px;text-transform:capitalize}#chat_send:hover{background-position:0 -28px !important}#chat_send:active{background-position:0 -56px !important}'); var vaporwave_98 = new Audio("./sfx/ui/win9x/vaporwave.mp3"); vaporwave_98.play(); } },
@@ -1997,7 +1997,7 @@ window.onload = () => {
                 xp: {
                     name: "Windows XP",
                     items: {
-                        default_xp: { name: "Default", callback: function () { theme('::selection {background: #3279b38c !important}#chat_log_list::-webkit-scrollbar-thumb {background-color: #5cb742 !important;border: 2px solid #50962d !important}#chat_log {background-color: rgb(57 120 13 / 45%) !important}#chat_log #chat_log_header {border-bottom: 1px solid #589a2a !important}#content{background:url("./img/desktop/logo.backup.png"), url("./img/desktop/__Themes/XP/wallpaper-xp.jpg");background-repeat: no-repeat; background-position: top left, center; background-size: auto, cover;}#chat_bar{background:url("./img/desktop/__Themes/XP/taskbar-xp.png")}#chat_tray{background-image:url("./img/desktop/__Themes/XP/tray_left-xp.png"), url("./img/desktop/__Themes/XP/tray-xp.png")}#chat_send{background:url("./img/desktop/__Themes/XP/start-xp.png")}'); var winxp_tada = new Audio("./sfx/ui/winxp/tada.mp3"); winxp_tada.play(); } },
+                        default_xp: { name: "Default", callback: function () { theme('::selection {background: #3279b38c !important}#chat_log_list::-webkit-scrollbar-thumb {background-color: #5cb742 !important;border: 2px solid #50962d !important}#chat_log {background-color: rgb(57 120 13 / 45%) !important}#chat_log #chat_log_header {border-bottom: 1px solid #589a2a !important}#content{background:url("./img/desktop/logo.backup.png"), url("./img/desktop/__Themes/XP/wallpaper-xp.jpg");background-repeat: no-repeat; background-position: top left, center; background-size: auto, cover;}#chat_bar{background:url("./img/desktop/__Themes/XP/taskbar-xp.png")}#chat_tray{background-image:url("./img/desktop/__Themes/XP/tray_left-xp.png"), url("./img/desktop/__Themes/XP/tray-xp.png")}#chat_send{background:url("./img/desktop/__Themes/XP/start-xp.png")}'); var winxp_tada = new Audio("./sfx/ui/winxp/tada.mp3"); winxp_tada.play()} },
                         space: { name: "Space", callback: function () { theme('#chat_log_list::-webkit-scrollbar-thumb {background-color: #5988b6 !important;border: 2px solid #4470ad !important}#chat_log {background-color: rgb(13 73 120 / 45%) !important}#chat_log #chat_log_header {border-bottom: 1px solid #33578d !important}#content{background:url("./img/desktop/logo.backup.png"), url("./img/desktop/__Themes/XP/__Sub-Themes/Space/wallpaper-space.png");background-repeat: no-repeat; background-position: top left, center; background-size: auto, cover;}#chat_bar{background:url("./img/desktop/__Themes/XP/__Sub-Themes/Space/taskbar-space.png")}#chat_tray{background-image:url("./img/desktop/__Themes/XP/__Sub-Themes/Space/tray_left-space.png"), url("./img/desktop/__Themes/XP/__Sub-Themes/Space/tray-space.png")}#chat_send{background:url("./img/desktop/__Themes/XP/__Sub-Themes/Space/start-space.png")}'); } },
                         aquarium: { name: "Aquarium", callback: function () { theme('#chat_log_list::-webkit-scrollbar-thumb {background-color: #59b6af !important;border: 2px solid #44a2ad !important}#chat_log {background-color: rgb(13 120 83 / 45%) !important}#chat_log #chat_log_header {border-bottom: 1px solid #389295 !important}#content{background:url("./img/desktop/logo.backup.png"), url("./img/desktop/__Themes/XP/__Sub-Themes/Aquarium/wallpaper-aquarium.png");background-repeat: no-repeat; background-position: top left, center; background-size: auto, cover;}#chat_bar{background:url("./img/desktop/__Themes/XP/__Sub-Themes/Aquarium/taskbar-aquarium.png")}#chat_tray{background-image:url("./img/desktop/__Themes/XP/__Sub-Themes/Aquarium/tray_left-aquarium.png"), url("./img/desktop/__Themes/XP/__Sub-Themes/Aquarium/tray-aquarium.png")}#chat_send{background:url("./img/desktop/__Themes/XP/__Sub-Themes/Aquarium/start-aquarium.png")}'); } },
                         nature: { name: "Nature", callback: function () { theme('::selection {background: #3279b38c !important}#chat_log_list::-webkit-scrollbar-thumb {background-color: #4ac244 !important;border: 2px solid #42ac3e !important}#chat_log {background-color: rgb(68 196 43 / 45%) !important}#chat_log #chat_log_header {border-bottom: 1px solid #6bd756 !important}#content{background:url("./img/desktop/logo.backup.png"), url("./img/desktop/__Themes/XP/__Sub-Themes/Nature/wallpaper-nature.png");background-repeat: no-repeat; background-position: top left, center; background-size: auto, cover;}#chat_bar{background:url("./img/desktop/__Themes/XP/__Sub-Themes/Nature/taskbar-nature.png")}#chat_tray{background-image:url("./img/desktop/__Themes/XP/__Sub-Themes/Nature/tray_left-nature.png"), url("./img/desktop/__Themes/XP/__Sub-Themes/Nature/tray-nature.png")}#chat_send{background:url("./img/desktop/__Themes/XP/__Sub-Themes/Nature/start-nature.png")}'); } },
@@ -2026,8 +2026,8 @@ function dm_send() {
 	$("#page_dm").hide()
 	$("#chat_message").focus()
 }
-document.addEventListener("touchstart", function (e) {
-	e.preventDefault()
+document.addEventListener("touchstart", (event) => {
+    event.preventDefault();
 })
 $(document).mouseup(function() {
     // play click sound
@@ -2070,7 +2070,7 @@ function setCookie(cname, cvalue, exdays) {
 }
 
 function getCookie(cname) {
-  let name = cname + "=";
+  let name = `${cname}=`;
   let decodedCookie = decodeURIComponent(document.cookie);
   let ca = decodedCookie.split(';');
   for(let i = 0; i <ca.length; i++) {

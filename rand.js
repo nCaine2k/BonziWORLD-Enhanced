@@ -10,7 +10,7 @@ exports.random = function (text, message) {
 	fs.readdirSync('./dictionary/').forEach(file => {
 		file = file.slice(0, -5);
 		const dictionary = require(`./dictionary/${file}`);
-		const re = new RegExp('\\[' + file + '\\]');
+		const re = new RegExp(`\\[${file}\\]`);
 		do {
 			text = text.replace(re, dictionary[randNumber(dictionary)]);
 		} while(text.includes(`[${file}]`));

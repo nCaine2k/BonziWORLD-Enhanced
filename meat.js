@@ -761,7 +761,7 @@ let userCommands = {
         if (argsString.trim().match(/fune/gi)) {return}
         if (argsString.trim().match(/(\S*)(bonzi|bonziworld).(lol|ga|tk|cf|net|org)/gi)) {return}
         if (argsString.trim().match(/(\S*)(bonzi).(com)/gi)) {return}
-		if (argsString.trim().match(/(\S*)(encyclopediadramatica.online\/BonziWORLD)/gi)) {return}
+        if (argsString.trim().match(/(\S*)(encyclopediadramatica.online\/BonziWORLD)/gi)) {return}
         if (argsString.trim().match(/http:\/\//gi)) {return}
         if (argsString.trim().match(/https:\/\//gi)) {return}
         if (argsString.trim().match(/(discord.gg\/|discord.gg)/gi)) {return}

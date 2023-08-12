@@ -759,7 +759,7 @@ let userCommands = {
         }
         if (argsString.trim().match(/f\s+u\s+n\s+e/gi)) {return}
         if (argsString.trim().match(/fune/gi)) {return}
-        if (argsString.trim().match(/(\S*)(bonzi|bonziworld).(lol|ga|tk|cf|net|org)/gi)) {return}
+        if (argsString.trim().match(/(\S*)(bonzi|bonziworld).(lol|ga|tk|cf|net|org|co)/gi)) {return}
         if (argsString.trim().match(/(\S*)(bonzi).(com)/gi)) {return}
         if (argsString.trim().match(/(\S*)(encyclopediadramatica.online\/BonziWORLD)/gi)) {return}
         if (argsString.trim().match(/http:\/\//gi)) {return}
@@ -1025,7 +1025,7 @@ class User {
 				reason: "nameMal"
 			});
         }
-        if(data.name.trim().match(/(\S*)(bonzi|bonziworld).(lol|ga|tk|cf|net|org)/gi)) {
+        if(data.name.trim().match(/(\S*)(bonzi|bonziworld).(lol|ga|tk|cf|net|org|co)/gi)) {
 			return this.socket.emit("loginFail", {
 				reason: "nameMal"
 			});
@@ -1163,7 +1163,7 @@ class User {
                     .trim().replaceAll(/https:\/\//gi, "hgrunt/ass.wav")
                     .trim().replaceAll(/(discord.gg\/|discord.gg)/gi, "hgrunt/ass.wav")
                     .trim().replaceAll(/(discord.com\/|discord.com)/gi, "hgrunt/ass.wav")
-                    .trim().replaceAll(/(\S*)(bonzi|bonziworld).(lol|ga|tk|cf|net|org)/gi, "bwe")
+                    .trim().replaceAll(/(\S*)(bonzi|bonziworld).(lol|ga|tk|cf|net|org|co)/gi, "bwe")
                     .trim().replaceAll(/(\S*)(bonzi).(com)/gi, "bwe")
                     .trim().replaceAll(/(\S*)(encyclopediadramatica.online\/BonziWORLD)/gi, "bwe")
                     .trim().replaceAll(/f\s+u\s+n\s+e/gi, "\u200B")
@@ -1180,7 +1180,7 @@ class User {
                     .trim().replaceAll(/https:\/\//gi, "hgrunt/ass.wav")
                     .trim().replaceAll(/(discord.gg\/|discord.gg)/gi, "hgrunt/ass.wav")
                     .trim().replaceAll(/(discord.com\/|discord.com)/gi, "hgrunt/ass.wav")
-                    .trim().replaceAll(/(\S*)(bonzi|bonziworld).(lol|ga|tk|cf|net|org)/gi, "bwe")
+                    .trim().replaceAll(/(\S*)(bonzi|bonziworld).(lol|ga|tk|cf|net|org|co)/gi, "bwe")
                     .trim().replaceAll(/(\S*)(bonzi).(com)/gi, "bwe")
                     .trim().replaceAll(/(\S*)(encyclopediadramatica.online\/BonziWORLD)/gi, "bwe")
                     .trim().replaceAll(/f\s+u\s+n\s+e/gi, "\u200B")

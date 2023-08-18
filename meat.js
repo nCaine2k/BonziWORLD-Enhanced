@@ -29,9 +29,9 @@ process.on("uncaughtException", (err) => {
 // fuck off bozoworlders!
 function sanitizeHTML(string){
 return string
-    .replaceAll("&",  "&amp;")
+    //.replaceAll("&",  "&amp;")
     .replaceAll("#",  "&num;")
-    //.replaceAll("'",  "&apos;")
+    .replaceAll("'",  "&apos;")
     .replaceAll("\"", "&quot;");
 }
 function sanitizeHTML2(string){

@@ -2,7 +2,7 @@
 
 <hr>
 
-- [ ] Improve "fix" to link xss bug [**4% done**]
+- [ ] Improve "fix" to link xss bug [**98% done**]
 - [ ] Update code to utilize the latest version of socket.io (client & server) [**0% done**]
 - [x] Place a license on this project [**100% done**]
 - [ ] Implement CosmicBOTv2 to the code [**0% done**] (joke)

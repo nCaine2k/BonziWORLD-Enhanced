@@ -18,7 +18,7 @@
     "start": "node server.js"
   },
   "engines": {
-    "node": ">=19"
+    "node": ">=18"
   },
   "dependencies": {
     "axios": "^0.27.2",

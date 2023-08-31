@@ -1223,10 +1223,12 @@ class User {
 						icon_url: IMAGE_URL,
 					},
 				};
-				if (settings.show_embeds == true) {
-					hook.send({username: `${this.public.name}  -  Room ID: ${rid}`, avatarURL: IMAGE_URL, embeds: [messageEmbed]});
-				} else {
-					hook.send({username: `${this.public.name}  -  Room ID: ${rid}`, avatarURL: IMAGE_URL2, content: `> \u0060${txt}\u0060`});
+				if(settings.webhook.enabled == true) {
+					if (settings.webhook.show_embeds == true) {
+						hook.send({username: `${this.public.name}  -  Room ID: ${rid}`, avatarURL: IMAGE_URL, embeds: [messageEmbed]});
+					} else {
+						hook.send({username: `${this.public.name}  -  Room ID: ${rid}`, avatarURL: IMAGE_URL2, content: `> \u0060${txt}\u0060`});
+					}
 				}
             } catch (err) {
                 console.log(`WTF?: ${err.stack}`);

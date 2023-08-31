@@ -197,5 +197,8 @@
 	"express": {
 		"serveStatic": true
 	},
-	"show_embeds": false
+	"webhook": {
+		"enabled": false,
+		"show_embeds": false
+	}
 }

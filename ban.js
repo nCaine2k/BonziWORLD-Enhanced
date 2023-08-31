@@ -201,14 +201,12 @@ exports.handleReport = (name) => {
 		},
 	};
 
-	try {
-		if (settings.show_embeds == true) {
+	if(settings.webhook.enabled == true) {
+		if (settings.webhoook.show_embeds == true) {
 			reports_hook.send({username: `${reporter}  -  New Report!`, avatarURL: IMAGE_URL, embeds: [reportEmbed]});
 		} else {
 			reports_hook.send({username: `${reporter}  -  New Report!`, avatarURL: IMAGE_URL, content: `> \u0060\n**Who: **${username}\n**Room ID: **${rid}\n**Reason: **${reason}.\n**Reporter: **${reporter}\u0060`});
 		}
-	} catch (err) {
-		console.log(`WTF?: ${err.stack}`);
 	}
 	console.log(`!!REPORT!!\nWho: ${username}\nRoom ID: ${rid}\nReason: ${reason}.\nReporter: ${reporter}`);
 	return true;

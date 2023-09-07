@@ -2,7 +2,7 @@
 
 <hr>
 
-- [ ] Improve "fix" to link xss bug [**98% done**]
+- [x] Improve "fix" to link xss bug [**100% done**]
 - [ ] Update code to utilize the latest version of socket.io (client & server) [**0% done**]
 - [x] Place a license on this project [**100% done**]
 - [ ] Implement CosmicBOTv2 to the code [**0% done**] (joke)
@@ -16,5 +16,6 @@
 - [x] Add mouth moving animations to all bonzi colors [**100% done**]
 - [ ] Refactor the old programming techniques in the back-end to use updated ES methods beyond 2016 (ES2018 - 2023) [**0% done**]
 - [ ] Update bootstrap.css version [**0% done**]
+- [ ] Profile code to find slowdowns [**0% done**]
 
 <hr>

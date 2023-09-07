@@ -17,5 +17,6 @@
 - [ ] Refactor the old programming techniques in the back-end to use updated ES methods beyond 2016 (ES2018 - 2023) [**0% done**]
 - [ ] Update bootstrap.css version [**0% done**]
 - [ ] Profile code to find slowdowns [**0% done**]
+- [ ] Port BWE and vanilla BonziWORLD to Java [**0% done**]
 
 <hr>

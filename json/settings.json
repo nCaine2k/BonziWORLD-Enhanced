@@ -172,7 +172,8 @@
     ],
     "bonziColors": [
         "purple",
-        "magenta",
+	"white",
+	"magenta",
         "pink",
         "blue",
         "cyan",
